@@ -1,48 +1,37 @@
 class Solution:
     def findCircleNum(self, isConnected: List[List[int]]) -> int:
-        """ store connections"""
         n = len(isConnected)
-        graph = []
+        rank = [1] *(n)
+        root = [i for i in range(n)]
         
-        for i in range(n):
-            for j in range(i,n):
-                if isConnected[i][j] == 1:
-            
-                    graph.append([i,j])
-            
-       
+        """find function"""
+        def find(x):
+            if root[x] == x:
+                return x
+            root[x] = find(root[x])
+            return root[x]
         
-        
-        def dfs(root, safe):
+        """Union function"""
+        def union(i,j):
+            root_i, root_j = find(i), find(j)
             
-            if  root in safe:
-                return
-            
-
-            safe.add(root)
-            for j in range(len(graph)):
-                if graph[j][0] == root and graph[j][1] != root:
-                    dfs(graph[j][1],safe)
-                elif graph[j][1] == root and graph[j][0] != root:
-                    dfs(graph[j][0],safe)
+            if root_i != root_j:
+                if rank[root_i] >= rank[root_j]:
+                    rank[root_i] += rank[root_j]
+                    rank[root_j] = 0
                     
-            return 
-        
-        
-        
-       
-        count = 0
-        """ driver code"""
-        safe = set()
-        visited = set()
+                    root[root_j] = root_i
+                else:
+                    rank[root_j] += rank[root_i]
+                    rank[root_i] = 0
+                    
+                    root[root_i] = root_j
+                    
+                    
+        """Driver code"""
         for i in range(n):
-            if i in safe:
-                continue
-            count += 1
-            dfs(i,safe)
-            
-     
-        
-        """ answer finalization """
-        
-        return count
+            for j in range(i+1, n):
+                if isConnected[i][j] == 1:
+                    union(i,j)
+    
+        return (n - rank.count(0))
