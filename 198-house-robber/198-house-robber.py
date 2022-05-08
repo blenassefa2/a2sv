@@ -5,8 +5,8 @@ class Solution:
         def rec(index,sum_):
             if index >= len(nums):
                 return sum_
-            sum_ += nums[index]
-            return max(rec(index+2,sum_), rec(index+3,sum_))
+        
+            return max(rec(index+1,sum_), rec(index+2,sum_+nums[index]))
         final =  -1
         for i in range(len(nums)):
             final = max(final, rec(i,0))
