@@ -1,5 +1,4 @@
 class Solution:
     def numberOfSteps(self, num: int) -> int:
-        n = bin(num)
-        n = n[2:]
-        return n.count("0") + (n.count("1") *2) - 1
+         
+        return ((bin(num))[2:]).count("0") + (bin(num)[2:].count("1") *2) - 1
