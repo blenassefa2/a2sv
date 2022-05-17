@@ -3,15 +3,16 @@ class Solution:
         if n == 0:
             return [0]
         ls= [0,1]
-         
+        
+        x = 0 
+        for i in range(2, n+1):
+            if not i & i - 1:
+                x += 1
             
-        while len(ls) <= n:
-            t = []
-            for l in ls:
-                t.append(l+1)
-                if len(t) + len(ls) > n:
-                    break
-            ls.extend(t)
+            a = (i -(1 << x))
+            ls.append(ls[a] +1)
+   
+                
         return(ls)
             
         
