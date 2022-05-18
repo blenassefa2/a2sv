@@ -1,17 +1,16 @@
 class Solution:
     def findErrorNums(self, nums: List[int]) -> List[int]:
-        all_ = 0
+        repeated, affected = 0, 0
         s = list(set(nums))
-        nw = 0
-        original = 0
-        
-        for x in nums:
-            original ^= x
+         
+        for x in range(len(nums)):
+            positive = abs(nums[x])
+            nums[positive - 1] *= -1
+            if nums[positive -1] > 0:
+                repeated = positive
             
-        for i in range(len(nums)+1):
-            all_ ^=i
+            affected ^= ((x + 1) ^positive)
+            
         
-        for j in s:
-            nw ^= j
-        return [nw^original, all_^ nw] 
+        return [repeated,affected^repeated] 
             
