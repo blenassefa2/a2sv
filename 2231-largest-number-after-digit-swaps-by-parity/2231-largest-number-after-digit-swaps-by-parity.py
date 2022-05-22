@@ -4,20 +4,26 @@ class Solution:
     
         odd = deque([])
         even = deque([])
+        counter = [0]*10
         
         for i in range(len(ls)):
+            counter[int(ls[i])] += 1
             if int(ls[i]) % 2 == 0:
                 even.append(i)
             else:
                 odd.append(i)
-        ls.sort(reverse=True)
-        
+        j = 9
         nw = ["0"]*len(ls)
-        for j in range(len(ls)):
-            x = int(ls[j])
-            if x %2 == 0:
-                nw[even.popleft()] = ls[j]
-            else:
-                nw[odd.popleft()] = ls[j]
+        while j >=0:
+            if counter[j] >= 1:
+                if j %2 == 0:
+                    nw[even.popleft()] = str(j)
+                else:
+                    nw[odd.popleft()] = str(j)
+                counter[j] -= 1
+                continue
+            j -= 1
+        
+       
         return int("".join(nw))
         
