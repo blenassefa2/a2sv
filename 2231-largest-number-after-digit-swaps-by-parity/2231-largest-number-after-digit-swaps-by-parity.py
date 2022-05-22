@@ -13,17 +13,17 @@ class Solution:
             else:
                 odd.append(i)
         j = 9
-        nw = ["0"]*len(ls)
+        
         while j >=0:
             if counter[j] >= 1:
                 if j %2 == 0:
-                    nw[even.popleft()] = str(j)
+                    ls[even.popleft()] = str(j)
                 else:
-                    nw[odd.popleft()] = str(j)
+                    ls[odd.popleft()] = str(j)
                 counter[j] -= 1
                 continue
             j -= 1
         
        
-        return int("".join(nw))
+        return int("".join(ls))
         
