@@ -8,8 +8,8 @@ class Solution:
        
         for i in range(len(words)):
             for j in range(len(words)):
-                u  = (mapp[i].union(mapp[j]))
-               
+                u  = (mapp[i]|(mapp[j]))
+              
                 if (len(mapp[i]) + len(mapp[j])) == len(u):
                     ans = max(ans, len(words[i]) * len(words[j]))
         return(ans)
