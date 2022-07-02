@@ -3,23 +3,26 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         
-        [[5,1,9,5],
-         [2,4,8,1],
-         [13,3,6,9],
-         [16,7,10,11]]
+        [1,2,3],
+        [4,5,6],      1, 2 => 2,1
+        [7,8,9]      
         
-        [11,12,14,15]
+        [1,4,7]
+        [2,5,8]
+        [3,6,9]
+        
+        
+        
         """
-        n = len(matrix)
-        new = []
+        n = len(matrix) -1
+        changed = set()
+        for i in range(n+1):
+            for j in range(n+1):
+                if (i,j) in changed:
+                    continue
+                changed.add((i,j))
+                changed.add((j, abs(i-n)))
+                matrix[i][j], matrix[j][abs(i-n)] = matrix[j][abs(i-n)], matrix[i][j]
         
-        for i in range(n):
-            a = []
-            for j in range(n-1, -1, -1):
-                a.append(matrix[j][i])
-            new.append(a)
-    
-        for i in range(n):
-            for j in range(n):
-                matrix[i][j] = new[i][j]
+       
         
