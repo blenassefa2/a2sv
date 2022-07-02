@@ -11,13 +11,14 @@ class Solution:
         [2,5,8]
         [3,6,9]
         
-        
+        when ever you want a transpos of a matrix just interchange the i,j ->j,i
         
         """
         n = len(matrix) -1
         changed = set()
         for i in range(n+1):
             for j in range(n+1):
+                
                 if (i,j) in changed:
                     continue
                 changed.add((i,j))
