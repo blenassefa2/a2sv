@@ -5,14 +5,13 @@ class Solution:
         --------------------
         
         calculate total_space
-        construct the matrix
         decreament the guards and wall from total_space
         
         for each guard 
             calculate how long it can guard 
-            subtruct that from total_matrix
+            then update total_guarded
             
-        return final of total_space
+        return final of total_space -total_guarded
         
         complexity:
         -----------
