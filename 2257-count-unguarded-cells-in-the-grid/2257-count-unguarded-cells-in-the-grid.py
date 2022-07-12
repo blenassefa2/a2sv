@@ -16,7 +16,7 @@ class Solution:
         complexity:
         -----------
         
-        Time complexity  = O(len(guards)*(n+m) + n*m)
+        Time complexity  = O(len(guards)*(n+m) )
         space complexity = O(n*m)
         
         """
