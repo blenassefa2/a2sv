@@ -12,7 +12,7 @@ class Solution:
         Complexity:
         -----------
         
-        Time complexity O(Kn) = O(n)  # we touch each index maximum some constant times not n times
+        Time complexity O(Kn) = O(n)  # we touch each index maximum some constant k < n times
         space complexity O(33) = O(1)
         """
         x = max(nums)
