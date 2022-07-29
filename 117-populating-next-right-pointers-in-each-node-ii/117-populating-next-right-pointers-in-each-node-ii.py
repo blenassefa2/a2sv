@@ -12,16 +12,16 @@ class Solution:
     def connect(self, root: 'Node') -> 'Node':
         
         qu = deque([root])
-        ls = deque([])
+        
         while qu:
             ls = deque([x for x in qu])
             
             N = len(qu)
             for i in range(N):
-                qu.popleft()
-                a = ls.popleft()
-                if ls:
-                    a.next = ls[0]
+                a = qu.popleft()
+                
+                if qu and i < N - 1 :
+                    a.next = qu[0]
                 if a:
                     if a.left:
                         qu.append(a.left)
