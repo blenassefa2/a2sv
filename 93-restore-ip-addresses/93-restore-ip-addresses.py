@@ -25,12 +25,17 @@ class Solution:
             
                 
                 
-        for i in range(0, len(s)):
-            for j in range(1, len(s)):
-                for k in range(2, len(s)):
-                    tmp = helper(i,j,k)
-                    if tmp:
-                        self.ans.add(tmp)
+        def recurs(d1,d2,d3):
+            tmp = helper(d1,d2,d3)
+            if tmp:
+                self.ans.add(tmp)
+             
+            if not (d3 < len(s)):
+                return
+            
+            recurs(d1,d2,d3+1)
+            recurs(d1,d2+1,d3 +1)
+            recurs(d1 +1,d2+1,d3 +1)
                         
-       
+        recurs(0,1,2)
         return(self.ans)
