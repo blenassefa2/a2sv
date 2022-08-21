@@ -1,5 +1,8 @@
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
+        
+        self.ans = []
+        
         n = defaultdict(list)
         
         n["2"] =["a", "b","c"]
@@ -10,13 +13,15 @@ class Solution:
         n["7"] =["p","q","r","s"]
         n["8"] =["t", "u", "v"]
         n["9"] =["w","x","y","z"]
-        a = len(digits)
-        if a == 0:
-            return []
-        if a == 1:
-            return n[digits[0]]
-        if a == 2:
-            return [x+b for x, b in product(n[digits[0]], n[digits[1]])]
-        if a == 3:
-            return [x+b+c  for x, b, c in product(n[digits[0]], n[digits[1]],n[digits[2]])]
-        return [x+b+c+d for x, b,c,d in product(n[digits[0]], n[digits[1]],n[digits[2]],n[digits[3]])]
+        
+        
+        def recurs(index, combo):
+            if index >= len(digits):
+                if combo:
+                    self.ans.append(combo)
+                return
+            
+            for i in n[digits[index]]:
+                recurs(index + 1, combo + i)
+        recurs(0,"")       
+        return self.ans
