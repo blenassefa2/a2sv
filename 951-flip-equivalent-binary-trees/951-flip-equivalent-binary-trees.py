@@ -15,8 +15,8 @@ class Solution:
             if t1.val != t2.val:
                 return False
             
-            corr =func(t1.right, t2.right) and func(t1.left, t2.left)
-            incorr = func(t1.right, t2.left) and func(t1.left, t2.right)
+            not_flpd =func(t1.right, t2.right) and func(t1.left, t2.left)
+            flpd = func(t1.right, t2.left) and func(t1.left, t2.right)
             
-            return corr or incorr
+            return not_flpd or flpd
         return func(root1, root2)
