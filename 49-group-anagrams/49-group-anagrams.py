@@ -1,17 +1,10 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        s = ["".join(sorted(list(a))) for a in strs]
+        s = defaultdict(list)
         
-        di = defaultdict(list)
+        for a in strs:
+           
+            s["".join(sorted(a))].append(a)
         
-        for i in range(len(s)):
-            di[s[i]].append(i)
-            
-        ans = []
-        
-        for x in di:
-            temp = []
-            for b in di[x]:
-                temp.append(strs[b])
-            ans.append(temp)
-        return ans
+        return [s[i] for i in s]
+                
