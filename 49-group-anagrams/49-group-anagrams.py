@@ -6,5 +6,5 @@ class Solution:
            
             s["".join(sorted(a))].append(a)
         
-        return [s[i] for i in s]
+        return s.values()
                 
