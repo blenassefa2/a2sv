@@ -15,13 +15,24 @@ class Solution:
         
          Time complexity => O(n!)
          space complexity => O(n!) if you consider the stack
+         I got it reduced to tc-> O(n) sc -> O(n)if you consider the stack
+         
+         by using backtracking and dp
+         instead of recursing for all possible combination that works with i
+         
+         I keeptrack of a string and check two possibilities of including or not including i
+         
         """
 
-        def recurse(curr,i):
+        def recurse(curr,i,dp):
             if len(set(curr)) != len(curr):
                 return 0
-            ans = len(curr)
-            for j in range(i, len(arr)):
-                ans = max(ans, recurse(curr+arr[j],j))
-            return ans
-        return recurse('',0)
+            if i >= len(arr):
+                return len(curr)
+            if (curr,i) not in dp:
+                dp[(curr,i)] =  max(recurse(curr+arr[i],i+1,dp), recurse(curr, i+1,dp))
+                
+            return dp[(curr,i)] 
+             
+            
+        return recurse('',0,defaultdict(int))
