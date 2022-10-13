@@ -8,14 +8,14 @@
 class Solution:
     
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        self.vals = []
+        self.prev = -inf
         def func(node):
             if not node :
                 return True
             ans = func(node.left) 
-            if self.vals:
-                 ans = ans and self.vals[-1] < node.val
-            self.vals.append(node.val)
+            
+            ans = ans and self.prev < node.val
+            self.prev = node.val
             ans = ans and func(node.right)
             return ans
         return func(root)
