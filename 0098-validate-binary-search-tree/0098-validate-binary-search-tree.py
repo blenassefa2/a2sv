@@ -4,11 +4,19 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
 class Solution:
-    def isValidBST(self, root: Optional[TreeNode], l=-10000000000000000,r=1000000000000000) -> bool:
-        if not root :
-            return True
-        if not (l<root.val<r):
-            return False
-        return self.isValidBST(root.left,l,root.val) and self.isValidBST(root.right,root.val,r)
-        
+    
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        self.vals = []
+        def func(node):
+            if not node :
+                return True
+            ans = func(node.left) 
+            if self.vals:
+                 ans = ans and self.vals[-1] < node.val
+            self.vals.append(node.val)
+            ans = ans and func(node.right)
+            return ans
+        return func(root)
+    
