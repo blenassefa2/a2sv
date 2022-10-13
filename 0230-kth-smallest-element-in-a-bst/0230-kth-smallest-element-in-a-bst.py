@@ -15,7 +15,8 @@ class Solution:
             inorder(node.left)
             if self.count == k -1:
                 self.final = node.val
-            
+                self.count += 1
+                return
             self.count += 1
             inorder(node.right)
         inorder(root)
