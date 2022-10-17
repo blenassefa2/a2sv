@@ -1,31 +1,41 @@
 class Solution:
+    __dp = defaultdict()
+ 
+    def recurse(self, current: str, index: int, original: str) -> bool:
+        
+        if index >= len(original):
+            return not current
+        
+        if (current, index,original) in Solution.__dp:
+            return Solution.__dp[(current, index,original)]
+        answer = True
+        if original[index]  == ")":
+            
+            if current == "":
+                answer = False
+            else:
+                future = self.recurse(current[:-1], index + 1, original)
+                answer = answer and future
+                
+        elif original[index] == "(":
+            future = self.recurse(current + "(", index + 1, original)
+            answer = answer and future
+        else:
+            
+            future1 = self.recurse(current+"(", index + 1, original)
+            future2 = self.recurse(current, index + 1, original)
+            future3 = self.recurse(current[:-1], index + 1, original)
+            
+            answer = answer and future1 or future2 or future3
+            
+        Solution.__dp[(current, index,original)] = answer    
+        return answer
+        
+        
     def checkValidString(self, s: str) -> bool:
         
-        # initialize my two stacks for the star and opening parenthesis
-        open_parenthesis = []
-        star = []
+        answer = self.recurse("", 0, s)
+        return answer
         
-        for index, value in enumerate(s):
-            
-            if value == "(":
-                open_parenthesis.append(index)
-            elif value == "*":
-                star.append(index)
-            else:
-                if not open_parenthesis and not star:
-                    return False
-                
-                if open_parenthesis:
-                    open_parenthesis.pop()
-                else:
-                    star.pop()
         
-        while star and open_parenthesis:
-            if star[-1] < open_parenthesis[-1]:
-                return False
-            
-            star.pop()
-            open_parenthesis.pop()
-        
-        return not open_parenthesis
         
