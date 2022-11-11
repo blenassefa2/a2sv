@@ -1,21 +1,25 @@
 class Solution:
-    MAX_VALUE = 2**31 - 1
-    MIN_VALUE = -(2**31)
-
-    def divide(self, dividend: int, divisor: int) -> int:
-        result = 0
-        sign = 1 if dividend * divisor > 0 else -1
-        current = abs(dividend)
-        abs_divisor = abs(divisor)
-        while abs_divisor <= current:
-            i = 0
-            while (abs_divisor << (i + 1)) <= current:
-                i += 1
+    def dividePositive(self,dividend,divisor,sign):
+        
+        
+        quotient = 0
+        
+        # perform bit division
+        while dividend >= divisor:
             
-            current -= abs_divisor << i
-            result += 2**i
-
-        result *= sign
-        result = max(self.MIN_VALUE, result)
-        result = min(self.MAX_VALUE, result)
-        return result
+            newDivisor = 0
+            while divisor << (newDivisor+1) <= dividend:
+                newDivisor += 1
+                
+            dividend -= (divisor << newDivisor)
+            quotient |= (1<<newDivisor)
+            
+        
+        return quotient
+            
+    def divide(self, dividend: int, divisor: int) -> int:
+        if dividend*divisor < 0:
+            return max(-2147483648, -self.dividePositive(abs(dividend),abs(divisor), -1))
+        else:
+            return min(2147483647, self.dividePositive(abs(dividend),abs(divisor),1 ))
+        
