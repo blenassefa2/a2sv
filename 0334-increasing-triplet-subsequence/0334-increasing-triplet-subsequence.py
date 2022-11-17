@@ -24,9 +24,9 @@ class Solution:
                     stack.pop()
                 else:
                     if maximums[index] > nums[index]:
-                        return True
+                        isValid = True
                     index += 1
 
 
         # return final answer
-        return False
+        return isValid
