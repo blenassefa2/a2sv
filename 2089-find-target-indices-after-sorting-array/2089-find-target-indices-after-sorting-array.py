@@ -1,34 +1,29 @@
 class Solution:
     def targetIndices(self, nums: List[int], target: int) -> List[int]:
-        """ To have TC of O(1) I will use count sort SS of O(n)"""
-        
-        # initialize the necessary variables
-        counts = [0]* (max(nums) + 1)
-        answer = []
-        index = 0
-        countsIndex = 0
-        
-       
-        # fill the counts array
-        for i in nums:
-            counts[i] += 1
+        """ 
+        To have TC of O(n) I will use count sort SC of O(1)
+            *without counting the space used for output
             
-        # update nums to its sorted version inplace
-        while countsIndex < len(counts):
-            if counts[countsIndex] > 0:
-                nums[index] = countsIndex
-                
-                # update the answer
-                if nums[index] == target:
-                    answer.append(index)
-                
-                #update the indecies
-                counts[countsIndex] -= 1
-                index += 1
             
-            if counts[countsIndex] == 0:
-                countsIndex += 1
-     
-        return answer
+            
+            All we need is the 
+                f = frequency of the target and 
+                s = number of elements < target
+                
+            then the answer = [s, s+1, s+2,,,,s+f-1]
+        """
+        # initialize the needed variables
+        length = 0
+        less = 0
+        
+        # iterate throught nums and update the length and less
+        for value in nums:
+            if value < target:
+                less += 1
+            elif value == target:
+                length += 1
+                
+        # return the answer
+        return list(range(less,less + length))
         
         
