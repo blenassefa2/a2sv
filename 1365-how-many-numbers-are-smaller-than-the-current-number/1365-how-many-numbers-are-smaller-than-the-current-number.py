@@ -1,22 +1,22 @@
 class Solution:
     def smallerNumbersThanCurrent(self, nums: List[int]) -> List[int]:
-        count = 0 
+        """
+        TC: O(nlogn)
+        SC: O(n)
+        """
+        # initialize variables
+        newArray = list(range(len(nums)))
+        previous = [-1, 0]
         
-        c_array = [0]*(max(nums) + 1)
+        newArray.sort(key = lambda x: nums[x])
         
-        for i in nums:
-            c_array[i] += 1
-        
-        prefix = 0
-        for j in range(len(c_array)):
-            a = c_array[j] + prefix
-            c_array[j] = prefix
-            prefix = a
-        
-        ans = []
-        for k in nums:
-            ans.append(c_array[k])
-        return (ans)
-            
-            
-            
+        # iterate through newArray and update nums array
+        for i in range(len(newArray)):
+            if previous[0] == nums[newArray[i]]:
+                nums[newArray[i]] = previous[1]
+            else:
+                previous = [nums[newArray[i]], i]
+                nums[newArray[i]] = i
+                
+                
+        return nums
