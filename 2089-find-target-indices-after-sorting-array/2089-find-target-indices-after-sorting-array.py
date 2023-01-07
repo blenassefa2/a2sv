@@ -1,6 +1,6 @@
 class Solution:
     def targetIndices(self, nums: List[int], target: int) -> List[int]:
-        """ To have TC of O(1) I will use count sort"""
+        """ To have TC of O(1) I will use count sort SS of O(n)"""
         
         # initialize the necessary variables
         counts = [0]* (max(nums) + 1)
