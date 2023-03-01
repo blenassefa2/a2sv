@@ -5,23 +5,42 @@
 #         self.next = None
 
 class Solution:
+    def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        
+        if not head or not head.next:
+            return None
+        rabit,tortoise = head, head
+        
+        # phase 1
+        while rabit and rabit.next:
+            
+            rabit = rabit.next.next
+            tortoise = tortoise.next
+            if rabit == tortoise:
+                
+                break
+        if not rabit:
+            return  None
+        
+        rabit = head
+        #phase 2
+        while rabit and tortoise:
+            if rabit == tortoise:
+                return rabit
+            rabit = rabit.next
+            tortoise = tortoise.next
+            
+        return None
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
   
         
-        tailA = []
-        tailB = []
+        tailA = headA
         
-        while headA:
-            tailA.append(headA)
-            headA = headA.next
-        while headB:
-            tailB.append(headB)
-            headB = headB.next
-            
-        answer = None
-        while tailA and tailB:
-            if tailA[-1] != tailB[-1]:
-                return answer
-            answer = tailA.pop()
-            tailB.pop()
-        return answer
+        while tailA.next:
+            tailA = tailA.next
+        
+        tailA.next = headB
+        intersect = self.detectCycle(headA)
+        tailA.next = None
+        return intersect
+        
