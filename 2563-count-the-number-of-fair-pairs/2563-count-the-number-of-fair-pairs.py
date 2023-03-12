@@ -4,10 +4,8 @@ class Solution:
 
         nums.sort()
         ans = 0
-        temp = []
-        for i in nums:
-            lower_i = bisect.bisect_left(temp,lower-i)
-            upper_i = bisect.bisect_right(temp,upper-i)
+        for i in range(len(nums)):
+            lower_i = bisect.bisect_left(nums,lower-nums[i],hi=i)
+            upper_i = bisect.bisect_right(nums,upper-nums[i],hi=i)
             ans += upper_i - lower_i
-            temp.append(i)
         return ans
