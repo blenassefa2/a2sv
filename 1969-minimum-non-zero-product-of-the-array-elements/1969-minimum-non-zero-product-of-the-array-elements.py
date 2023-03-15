@@ -1,26 +1,16 @@
 class Solution:
+    def switch(self, num, i, numfinal):
+        
+        if i*2-1 == numfinal//2  :
+            return num
+        
+        return (num)*self.switch((num*num)%1000000007, i*2, numfinal)
+    
     def minNonZeroProduct(self, p: int) -> int:
-        """
-        [001, 010, 011, 
-         100, 101, 110, 111]
         
-        0001
-        0010
-        0011
-        0100
-        0101
-        0110
-        0111
-        1000
-        1001
-        1011
-        1100
-        1101
-        1110
-        1111
-      
-        """
-        _max = 2**p - 1
-        MOD = (10**9) + 7
-        return  (pow(_max - 1, ((_max + 1)// 2) -1 , MOD)  * _max)  % MOD
+        lastindex = pow(2,p) - 1
+        mod = pow(10,9)+7
+        if lastindex == 1:
+            return lastindex
         
+        return (self.switch(lastindex-1,1, lastindex-1)*lastindex % mod)
