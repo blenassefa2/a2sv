@@ -13,8 +13,8 @@ class Solution:
             
             return
         
-        for j in range(len(nums)):
-            recurse(j,[])
+        
+        recurse(0,[])
         return final
     
  
