@@ -1,22 +1,20 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        final = set()
-        def recurse(i, current):
-            if i >= len(nums):
-                final.add(tuple(current))
-                return
-
-
-
-            add = recurse(i + 1, [nums[i]]  + current)
-            noAdd = recurse(i + 1, current)
+        self.final = set()
+        def recurse(index, path):
+            if index >= len(nums):
+                self.final.add(tuple(sorted(path)))
+                return 
             
-            return
-        
-        
-        recurse(0,[])
-        return final
-    
+            p1 = [i for i in path]
+            p2 = [i for i in path]
+            p2.append(nums[index])
+            recurse(index + 1, p1)
  
+            recurse(index+ 1, p2)
             
-                
+            return 
+        
+        recurse(0, set())
+        return self.final
+            
